@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/doctor_home.dart';
+import 'theme/app_theme.dart';
 
 void main() {
   runApp(const KincareDoctorApp());
@@ -11,11 +12,9 @@ class KincareDoctorApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Kincare Doctor AI',
       debugShowCheckedModeBanner: false,
-      title: 'Kincare Doctor',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
+      theme: AppTheme.lightTheme,
       home: const DoctorHomeScreen(),
     );
   }

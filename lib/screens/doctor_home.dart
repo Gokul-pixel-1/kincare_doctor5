@@ -10,117 +10,120 @@ class DoctorHomeScreen extends StatefulWidget {
 }
 
 class _DoctorHomeScreenState extends State<DoctorHomeScreen> {
-  final ageCtrl = TextEditingController();
-  final symptomsCtrl = TextEditingController();
-  final durationCtrl = TextEditingController();
+  final TextEditingController _ageCtrl = TextEditingController();
+  final TextEditingController _symptomsCtrl = TextEditingController();
 
-  String gender = "Male";
-  final List<String> selectedComorb = [];
+  int _duration = 1;
 
-  final List<String> comorbList = [
+  final List<String> _allComorbidities = [
     "diabetes",
     "hypertension",
     "asthma",
+    "heart disease",
+    "obesity",
+    "thyroid",
+    "kidney disease",
   ];
 
-  void predictCondition() {
-    final logic = MedicalLogic();
+  final Set<String> _selectedComorbidities = {};
 
-    final age = int.tryParse(ageCtrl.text.trim()) ?? 25;
-    final duration = int.tryParse(durationCtrl.text.trim()) ?? 1;
+  void _predict() {
+    final int age = int.tryParse(_ageCtrl.text) ?? 0;
 
-    final result = logic.diagnose(
+    final result = MedicalLogic.diagnose(
       age: age,
-      gender: gender,
-      symptoms: symptomsCtrl.text,
-      durationDays: duration,
-      comorbidities: selectedComorb,
+      symptoms: _symptomsCtrl.text,
     );
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => ResultScreen(result: result),
-      ),
-    );
+   Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (_) => ResultScreen(
+      result: result,
+      age: age,
+      duration: _duration,
+    ),
+  ),
+);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Doctor Panel"),
-      ),
+      appBar: AppBar(title: const Text("Doctor Panel")),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Age"),
+            // ───────── Patient Details ─────────
+            const Text(
+              "Patient Details",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+
             TextField(
+              controller: _ageCtrl,
               keyboardType: TextInputType.number,
-              controller: ageCtrl,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Enter age",
-              ),
+              decoration: const InputDecoration(labelText: "Age"),
             ),
-            const SizedBox(height: 20),
 
-            const Text("Gender"),
-            DropdownButton<String>(
-              value: gender,
-              items: ["Male", "Female", "Other"]
-                  .map((e) => DropdownMenuItem(value: e, child: Text(e)))
-                  .toList(),
-              onChanged: (v) => setState(() => gender = v!),
-            ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
 
-            const Text("Symptoms"),
             TextField(
-              controller: symptomsCtrl,
+              controller: _symptomsCtrl,
               maxLines: 3,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Eg: chest pain, sweating",
-              ),
+              decoration: const InputDecoration(labelText: "Symptoms"),
             ),
-            const SizedBox(height: 20),
 
-            const Text("Duration (days)"),
-            TextField(
-              keyboardType: TextInputType.number,
-              controller: durationCtrl,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Eg: 2",
-              ),
+            const SizedBox(height: 16),
+
+            // ───────── Duration ─────────
+            Text("Duration (days): $_duration"),
+            Slider(
+              value: _duration.toDouble(),
+              min: 1,
+              max: 30,
+              divisions: 29,
+              label: "$_duration days",
+              onChanged: (v) => setState(() => _duration = v.toInt()),
             ),
-            const SizedBox(height: 20),
 
-            const Text("Comorbidity"),
+            const SizedBox(height: 16),
+
+            // ───────── Comorbidities ─────────
+            const Text(
+              "Comorbidities",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+
             Wrap(
-              spacing: 10,
-              children: comorbList.map((c) {
-                final isSel = selectedComorb.contains(c);
-                return ChoiceChip(
-                  selected: isSel,
+              spacing: 8,
+              children: _allComorbidities.map((c) {
+                final selected = _selectedComorbidities.contains(c);
+                return FilterChip(
                   label: Text(c),
-                  onSelected: (_) {
+                  selected: selected,
+                  onSelected: (v) {
                     setState(() {
-                      isSel ? selectedComorb.remove(c) : selectedComorb.add(c);
+                      v
+                          ? _selectedComorbidities.add(c)
+                          : _selectedComorbidities.remove(c);
                     });
                   },
                 );
               }).toList(),
             ),
-            const SizedBox(height: 30),
+
+            const SizedBox(height: 24),
 
             Center(
-              child: ElevatedButton(
-                onPressed: predictCondition,
-                child: const Text("Predict"),
+              child: ElevatedButton.icon(
+                icon: const Icon(Icons.analytics),
+                label: const Text("Predict"),
+                onPressed: _predict,
               ),
             ),
           ],
