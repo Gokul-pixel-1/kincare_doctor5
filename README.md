@@ -1,162 +1,97 @@
-🩺 Medscope AI
-Intelligent Clinical Decision Support System
+🩺 Medscope AI — Intelligent Health Risk Prediction App
+                            Medscope AI is an offline-first HealthTech mobile application designed to assist individuals in understanding potential health risks based on symptoms, age, gender, duration, and comorbidities — and guide them toward timely medical consultation.
+⚠️ Medscope AI is a clinical decision-support prototype, not a replacement for professional medical diagnosis.
+🚀 Key Features
+✅ Symptom-based disease prediction
+✅ Age-aware risk estimation (when a disease is more likely to occur)
+✅ Gender-aware clinical scoring
+✅ Comorbidity-adjusted risk analysis
+✅ Severity classification (Low / Moderate / High)
+✅ Clinical-style recommendations
+✅ Offline functionality (no internet required)
+✅ Privacy-first (no login, no cloud storage)
+✅ Clean, doctor-friendly UI
+✅ Modern medical app icon (stethoscope-based design)
+🧠 How the System Works
+Medscope AI uses a rule-based medical inference engine that:
+•	Parses user-entered symptoms
+•	Applies weighted scoring across:
+•	Symptoms
+•	Age group
+•	Gender
+•	Duration of illness
+•	Existing comorbidities
+Ranks diseases based on combined clinical risk score
+Outputs:
+•	Most probable condition
+•	Severity level
+•	Age risk range
+•	Confidence score
+•	Clinical recommendations
+•	Safety disclaimer
+All inference runs locally on the device.
+🏥 Diseases Covered (Prototype Stage)
+The current version supports 30+ common disease patterns, including:
+•	Cardiac / Angina risk
+•	Viral infections (fever, cold, flu patterns)
+•	Gastric disorders (ulcer, acidity, indigestion)
+•	Muscular strain & joint pain
+•	Migraine & neurological patterns
+•	Systemic infections (dengue / typhoid-like patterns)
+•	Respiratory conditions
+•	Metabolic & lifestyle-related risks
+The architecture supports easy expansion to 100+ diseases.
+🧬 Comorbidity Handling
+Risk scoring dynamically adjusts based on comorbidities such as:
+•	Diabetes
+•	Hypertension
+•	Asthma
+•	Obesity
+•	Chronic conditions (extendable)
+This improves realism and clinical relevance.
+📊 Output Details (Prediction Screen)
+Each prediction provides:
+🧠 Predicted condition
+📈 Severity level with color-coded indicators
+🎯 Age-based risk window
+📊 Confidence score
+🩺 Medical recommendations
+⚠️ Disclaimer with visual alert icon
+📱 App Screens (Prototype)
+•	Doctor-style input dashboard
+•	Structured symptom entry
+•	Comorbidity selection
+•	Detailed medical-style result screen
+🛠 Tech Stack
+•	Flutter (Dart)
+•	Local rule-based inference engine
+•	Android APK deployment
+•	No backend / No Firebase
+•	Offline-first architecture
+🔮 Future Roadmap
+Planned enhancements include:
+•	ML-based disease prediction models
+•	Population-level age-risk analytics
+•	Email-based user accounts
+•	Patient history & reports
+•	Cloud analytics & dashboards
+•	PDF health reports
+Expanded disease knowledge base
+👥 Target Users
+•	General public (health awareness)
+•	Preventive health screening
+•	Medical interns & trainees
+•	HealthTech research prototypes
+📝 Disclaimer
+•	This application is intended only for educational and screening purposes.
+•	It does not provide medical diagnosis or treatment.
+•	Always consult a licensed healthcare professional.
+📦 Build Output
+APK generated at:
+build/app/outputs/flutter-apk/app-release.apk
+📄 License
+MIT License — free for educational and research use.
+⭐ Support
+If you find this project useful, please ⭐ star the repository.
+Feedback and technical discussions are welcome!
 
-Medscope AI is a Flutter-based medical decision support application designed to assist healthcare professionals in preliminary clinical assessment based on patient-entered symptoms, age, duration, and comorbidities.
-The app uses a rule-based medical reasoning engine to generate disease likelihood, severity, age risk, confidence score, and clinical recommendations.
-
-⚠️ Medscope AI is a clinical support tool, not a replacement for professional medical diagnosis.
-
-🚀 Features
-🧑‍⚕️ Doctor Panel
-
-*Patient age input
-
-*Symptom text analysis
-
-*Duration (in days)
-
-*Comorbidity selection (diabetes, hypertension, asthma, etc.)
-
-*Clean, intuitive medical UI
-
-📊 Prediction Result Screen
-
-*Most likely clinical condition (single best match)
-
-*Severity classification (Low / Moderate / High)
-
-*Confidence score (%)
-
-*Age-based risk assessment (dynamic, patient-specific)
-
-*Duration awareness
-
-*Medical-style icons & structured layout
-
-*Clinical recommendations
-
-*Visual disclaimer with warning icon
-
-🎯 Smart Rule Engine
-
-*Rule-based diagnostic logic
-
-*Severity scoring based on:
-
-     *Symptoms
-     *Age
-     *Duration
-    *Comorbidities
-
-*Consistent, explainable results (no black-box AI)
-
-🎨 UI & UX
-
-*Modern Material Design
-
-*Medical-grade color palette
-
-*App launcher icon designed for healthcare branding
-
-*Responsive layout for different screen sizes
-
-🏗️ Tech Stack
-Layer	         Technology
-Frontend	     Flutter (Dart)
-Architecture	 Rule-based clinical logic
-UI	           Material Design
-Platforms	     Android (iOS ready)
-Icons	        flutter_launcher_icons
-
-📁 Project Structure
-kincare_doctor5/
-├── android/
-├── ios/
-├── assets/
-│   └── icon/
-│       └── medscope_ai_icon.png
-├── lib/
-│   ├── screens/
-│   │   ├── doctor_home.dart
-│   │   └── result_screen.dart
-│   ├── services/
-│   │   └── medical_logic.dart
-│   ├── theme/
-│   │   └── app_theme.dart
-│   └── main.dart
-├── pubspec.yaml
-└── README.md
-
-🧠 Medical Logic Overview
-
-Medscope AI uses a deterministic medical rule engine, not machine learning.
-
-The engine evaluates:
-
-*Symptom keywords
-
-*Age thresholds
-
-*Duration patterns
-
-*Selected comorbidities
-
-It then computes:
-
-*Disease likelihood score
-
-*Severity level
-
-*Confidence percentage
-
-*Age-risk relevance
-
-This approach ensures:
-
-*Predictable behavior
-
-*Clinical explainability
-
-*Offline capability
-
-⚠️ Disclaimer
-
-*This application is a clinical decision support tool only.
-*It does not provide medical diagnosis or treatment.
-*All clinical decisions must be made by a qualified healthcare professional.
-
-🧪 How to Run Locally
-*flutter pub get
-*flutter run
-
-
-To generate app launcher icons:
-
-dart run flutter_launcher_icons
-
-📦 Build APK / App Bundle
-*flutter build apk
-*flutter build appbundle
-
-📌 Future Enhancements
-
-Machine learning-based prediction engine
-
-*Patient history tracking
-
-*Cloud sync & analytics
-
-*Doctor login & role-based access
-
-*FDA-style risk scoring
-
-*Telemedicine integration
-
-👨‍💻 Author
-
-Gokul
-Flutter Developer | Medical AI Enthusiast
-
-⭐ Acknowledgement
-
-*Built with a strong focus on medical responsibility, UX clarity, and real-world usability.
